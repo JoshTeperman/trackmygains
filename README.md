@@ -1,24 +1,62 @@
-# README
+/workouts/:id/exercises/:id/set
+/workouts/:id/exercises
+/workouts
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+/sign_in
+/sign_up
+/profile
+/profile/edit
 
-Things you may want to cover:
+Resources
+- workouts
+  - start_time
+  - finish_time
+  - state :started, :complete, :deleted
+  - exercises[]
+    - name
+    - exercisable_type
+    - exercisable_id
+    - sets[]
+      - weight :integer
+      - reps :integer
 
-* Ruby version
+- CardioExercise (polymorphic -> Cardio, Resistance has_many :exercises, as: :exercisable) "rowing.exercises"; "squats.exercises"
+  - name
 
-* System dependencies
+- ResistanceExercise
+  - name
+  - target :cardio, :back, :chest, :shoulders, :legs, :core, :biceps, :triceps, :lats
 
-* Configuration
+class Exercise < ApplicationRecord
+  belongs_to :exercisable, polymorphic: true
+end
+ 
+class CardioExercise < ApplicationRecord
+  has_many :exercises, as: :exercisable
+end
+ 
+class ResistanceExercise < ApplicationRecord
+  has_many :exercises, as: :exercisable
+end
 
-* Database creation
 
-* Database initialization
+Day 1
+Workout 1
+  - Date: 11/11/2010
+  - Location: gym
+  - Exercise 1: Pull-up
+    - Set 1
+      - Reps * 3
+    - Set 2
+      - Reps * 3
+  - Exercise 2: Pushup
+    - Set 1
+      Reps * 20
+  - Exercise 3: Row
+    - Time: 30 minutes
+    - Distance: 2.5 km
 
-* How to run the test suite
+Stats
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+/stats/activity?period=month
+/stats/exercises/:id
