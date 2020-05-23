@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2020_05_23_124829) do
   create_table "workouts", force: :cascade do |t|
     t.datetime "start_time"
     t.datetime "finish_time"
-    t.string "state"
+    t.string "state", default: "started"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

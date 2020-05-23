@@ -3,7 +3,7 @@ class CreateWorkouts < ActiveRecord::Migration[6.0]
     create_table :workouts do |t|
       t.datetime :start_time
       t.datetime :finish_time
-      t.string :state
+      t.string :state, default: 'started'
 
       t.timestamps
     end
