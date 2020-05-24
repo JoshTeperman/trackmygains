@@ -9,34 +9,45 @@
 
 Resources
 - workouts
-  - start_time
-  - finish_time
-  - state :started, :complete, :deleted
+  - start_time: datetime
+  - finish_time: datetime
+  - state: enum (:started, :complete, :deleted)
+  - resistance_exercises[]
+    - name: string
+    - target: enum (:cardio, :back, :chest, :shoulders, :legs, :core, :biceps, :triceps, :lats)
+  - cardio_exercises[]
+    - name: string
+    - start_time: datetime
+    - finish_time: datetime
+    - total_time: integer(seconds)
+    - distance: decimal(km)
+
   - exercises[]
-    - name
     - exercisable_type
     - exercisable_id
-    - sets[]
-      - weight :integer
-      - reps :integer
 
-- CardioExercise (polymorphic -> Cardio, Resistance has_many :exercises, as: :exercisable) "rowing.exercises"; "squats.exercises"
-  - name
+class CardioExercisesWorkouts
+  belongs_to :cardio_exercises
+  belongs_to :workouts
+end
 
-- ResistanceExercise
-  - name
-  - target :cardio, :back, :chest, :shoulders, :legs, :core, :biceps, :triceps, :lats
+class Workouts < ApplicationRecord
+  has_many :cardio_exercises
+  has_many :resistance_exercises
+end
 
 class Exercise < ApplicationRecord
   belongs_to :exercisable, polymorphic: true
 end
- 
+
 class CardioExercise < ApplicationRecord
   has_many :exercises, as: :exercisable
+  has_many :workouts
 end
- 
+
 class ResistanceExercise < ApplicationRecord
   has_many :exercises, as: :exercisable
+  has_many :workouts
 end
 
 

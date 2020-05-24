@@ -9,6 +9,13 @@ class Workout < ApplicationRecord
     deleted: 'deleted'
   }
 
+  has_and_belongs_to_many :cardio_exercises
+  has_and_belongs_to_many :resistance_exercises
+
+  def all_exercises
+    resistance_exercises + cardio_exercises
+  end
+
   private
 
   def finish_time_is_after_start_time
