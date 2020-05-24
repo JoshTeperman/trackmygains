@@ -13,9 +13,10 @@
 ActiveRecord::Schema.define(version: 2020_05_24_064302) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "cardio_exercises", force: :cascade do |t|
+  create_table "cardio_exercises", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.integer "total_time"
     t.datetime "start_time"
@@ -25,32 +26,34 @@ ActiveRecord::Schema.define(version: 2020_05_24_064302) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "cardio_exercises_workouts", id: false, force: :cascade do |t|
-    t.bigint "cardio_exercise_id", null: false
-    t.bigint "workout_id", null: false
+  create_table "cardio_exercises_workouts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "cardio_exercise_id", null: false
+    t.uuid "workout_id", null: false
+    t.index ["workout_id", "cardio_exercise_id"], name: "index_cardio_exercises_workouts", unique: true
   end
 
-  create_table "exercises", force: :cascade do |t|
+  create_table "exercises", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "exercisable_type", null: false
-    t.bigint "exercisable_id", null: false
+    t.uuid "exercisable_id", null: false
     t.index ["exercisable_type", "exercisable_id"], name: "index_exercises_on_exercisable_type_and_exercisable_id"
   end
 
-  create_table "resistance_exercises", force: :cascade do |t|
+  create_table "resistance_exercises", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "target"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "resistance_exercises_workouts", id: false, force: :cascade do |t|
-    t.bigint "resistance_exercise_id", null: false
-    t.bigint "workout_id", null: false
+  create_table "resistance_exercises_workouts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "resistance_exercise_id", null: false
+    t.uuid "workout_id", null: false
+    t.index ["resistance_exercise_id", "workout_id"], name: "index_resistance_exercises_workouts", unique: true
   end
 
-  create_table "workouts", force: :cascade do |t|
+  create_table "workouts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "start_time"
     t.datetime "finish_time"
     t.string "state", default: "started"

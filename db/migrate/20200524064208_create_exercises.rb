@@ -1,6 +1,6 @@
 class CreateExercises < ActiveRecord::Migration[6.0]
   def change
-    create_table :exercises do |t|
+    create_table :exercises, id: :uuid do |t|
 
       t.timestamps
     end

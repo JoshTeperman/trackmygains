@@ -1,5 +1,5 @@
 class AddExercisableToExercise < ActiveRecord::Migration[6.0]
   def change
-    add_reference :exercises, :exercisable, polymorphic: true, null: false, index: true
+    add_reference :exercises, :exercisable, polymorphic: true, null: false, index: true, type: :uuid
   end
 end
