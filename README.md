@@ -15,6 +15,7 @@ Resources
   - resistance_exercises[]
     - name: string
     - target: enum (:cardio, :back, :chest, :shoulders, :legs, :core, :biceps, :triceps, :lats)
+    > target can be multiple
   - cardio_exercises[]
     - name: string
     - start_time: datetime
