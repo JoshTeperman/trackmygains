@@ -1,4 +1,8 @@
 class Workout < ApplicationRecord
+  has_and_belongs_to_many :exercises
+  has_many :resistance_exercises, through: :exercises, source: :exercisable, source_type: 'ResistanceExercise'
+  has_many :cardio_exercises, through: :exercises, source: :exercisable, source_type: 'CardioExercise'
+
   validates :state, presence: true, inclusion: { in: ['started', 'completed', 'deleted'] }
   validates :start_time, presence: true
   validate :finish_time_is_after_start_time, if: -> { start_time.present? && finish_time.present? }
@@ -8,12 +12,6 @@ class Workout < ApplicationRecord
     completed: 'completed',
     deleted: 'deleted'
   }
-
-  has_and_belongs_to_many :exercises
-
-  def all_exercises
-    resistance_exercises + cardio_exercises
-  end
 
   private
 
