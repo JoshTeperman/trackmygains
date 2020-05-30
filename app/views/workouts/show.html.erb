@@ -15,5 +15,9 @@
   <%= @workout.state %>
 </p>
 
+<% @exercises.each do |exercise| %>
+  <%= link_to "View Exercise: #{exercise.id}", workout_exercise_path(@workout, exercise) %>
+<% end %>
+
 <%= link_to 'Edit', edit_workout_path(@workout) %> |
 <%= link_to 'Back', workouts_path %>

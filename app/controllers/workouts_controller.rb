@@ -1,12 +1,12 @@
 class WorkoutsController < ApplicationController
   before_action :set_workout, only: [:show, :edit, :update, :destroy]
 
-
   def index
     @workouts = Workout.all
   end
 
   def show
+    @exercises = @workout.exercises
   end
 
   def new
@@ -59,3 +59,4 @@ class WorkoutsController < ApplicationController
       params.require(:workout).permit(:start_time, :finish_time, :state)
     end
 end
+

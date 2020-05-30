@@ -1,6 +1,13 @@
+/workouts :new, :create, :show, :edit, :update, :destroy
+/completed_workouts :create, :show, :index, :edit, :update, :destroy
+/deleted_workouts :create, :index, :update
+
 /workouts/:id/exercises/:id/set
 /workouts/:id/exercises
 /workouts
+
+/stats/activity?period=month
+/stats/exercises/:id
 
 /sign_in
 /sign_up
@@ -12,43 +19,38 @@ Resources
   - start_time: datetime
   - finish_time: datetime
   - state: enum (:started, :complete, :deleted)
-  - resistance_exercises[]
-    - name: string
-    - target: enum (:cardio, :back, :chest, :shoulders, :legs, :core, :biceps, :triceps, :lats)
-    > target can be multiple
-  - cardio_exercises[]
-    - name: string
-    - start_time: datetime
-    - finish_time: datetime
-    - total_time: integer(seconds)
-    - distance: decimal(km)
-
   - exercises[]
     - exercisable_type
     - exercisable_id
+    - resistance_exercises[]
+      - name: string
+      - target: enum (:back, :chest, :shoulders, :legs, :core, :biceps, :triceps, :lats)
+      > target can be multiple
+    - cardio_exercises[]
+      - name: string
+      - start_time: datetime
+      - finish_time: datetime
+      - total_time: integer(seconds)
+      - distance: decimal(km)
 
-class CardioExercisesWorkouts
-  belongs_to :cardio_exercises
-  belongs_to :workouts
-end
 
 class Workouts < ApplicationRecord
-  has_many :cardio_exercises
-  has_many :resistance_exercises
+  has_and_belongs_to_many :exercises
+  has_many :resistance_exercises, through: :exercises, source: :exercisable, source_type: 'ResistanceExercise'
+  has_many :cardio_exercises, through: :exercises, source: :exercisable, source_type: 'CardioExercise'
 end
 
 class Exercise < ApplicationRecord
   belongs_to :exercisable, polymorphic: true
+  has_and_belongs_to_many :workouts
 end
 
 class CardioExercise < ApplicationRecord
   has_many :exercises, as: :exercisable
-  has_many :workouts
 end
 
 class ResistanceExercise < ApplicationRecord
   has_many :exercises, as: :exercisable
-  has_many :workouts
 end
 
 
@@ -68,7 +70,3 @@ Workout 1
     - Time: 30 minutes
     - Distance: 2.5 km
 
-Stats
-
-/stats/activity?period=month
-/stats/exercises/:id
