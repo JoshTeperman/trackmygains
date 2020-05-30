@@ -1,5 +1,6 @@
-<h1>New Workout</h1>
+<%= content_for :page_title, 'New Workout' %>
 
-<%= render 'form', workout: @workout %>
+<h1>New Workout Page</h1>
 
+<%= link_to 'Start Workout', workouts_path, method: :post %>
 <%= link_to 'Back', workouts_path %>
