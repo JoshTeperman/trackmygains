@@ -18,7 +18,10 @@ Resources
 - workouts
   - start_time: datetime
   - finish_time: datetime
-  - state: enum (:started, :complete, :deleted)
+  - location: enum (:gym, :outside, :home)
+  - longitude: decimal
+  - latitude: decimal
+  - state: enum (:started, :complete, :paused, :cancelled, :deleted_workouts)
   - exercises[]
     - exercisable_type
     - exercisable_id
@@ -70,3 +73,18 @@ Workout 1
     - Time: 30 minutes
     - Distance: 2.5 km
 
+
+# Features
+
+## Current Workout
+Limited to one current workout. Can only create a new workout if there are no other started or paused workouts.
+Creating a new workout creates a session cookie that saves the current workout id.
+
+After Login:
+  -> if current_workout?
+    -> redirect to `current_workout#show`
+    -> resume current workout
+    -> other options (workouts index etc)
+    -> cancel workout
+  -> else
+    -> redirect to `workouts#new` or some type of home dashboard / stats summary
