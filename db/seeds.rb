@@ -1,14 +1,10 @@
 p 'Seeding Workouts...'
 
-new_workout = Workout.create!(start_time: Time.now)
+# current_workout
 
-started_workout = Workout.create!(start_time: 1.hour.ago)
-started_workout_exercise = ResistanceExercise.create!(
-  name: 'deadlift',
-  target: 'back'
-)
-started_workout.exercises << Exercise.create!(exercisable: started_workout_exercise)
+current_workout = Workout.create!(start_time: Time.now)
 
+# completed workouts
 completed_workout = Workout.new(start_time: 24.hours.ago, finish_time: 23.hours.ago, state: 'completed')
 completed_workout_cardio_exercise = CardioExercise.create!(
   name: 'elliptical',
@@ -26,3 +22,12 @@ completed_workout.exercises << Exercise.create!(exercisable: completed_workout_c
 completed_workout.exercises << Exercise.create!(exercisable: completed_workout_resistance_exercise_1)
 
 completed_workout.save!
+
+
+completed_workout_2 = Workout.create!(start_time: 48.hours.ago, finish_time: 45.hours.ago, state: 'completed')
+completed_workout_2_exercise = ResistanceExercise.create!(
+  name: 'deadlift',
+  target: 'back'
+)
+completed_workout_2.exercises << Exercise.create!(exercisable: completed_workout_2_exercise)
+
