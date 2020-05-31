@@ -1,23 +1,16 @@
-<p id="notice"><%= notice %></p>
+<%= content_for :page_title, 'View Workout' %>
+<h1>Workout Page</h1>
+<p><%= @workout.id %></p>
 
-<p>
-  <strong>Start time:</strong>
-  <%= @workout.start_time %>
-</p>
-
-<p>
-  <strong>Finish time:</strong>
-  <%= @workout.finish_time %>
-</p>
-
-<p>
-  <strong>State:</strong>
-  <%= @workout.state %>
-</p>
-
-<% @exercises.each do |exercise| %>
-  <%= link_to "View Exercise: #{exercise.id}", workout_exercise_path(@workout, exercise) %>
+<h2>Cardio Exercises</h2>
+<% @cardio_exercises.each do |exercise| %>
+  <p><%= exercise.inspect %></p>
+  <%= link_to 'View', workout_cardio_exercise_path(@workout, exercise) %>
 <% end %>
 
-<%= link_to 'Edit', edit_workout_path(@workout) %> |
-<%= link_to 'Back', workouts_path %>
+
+<h2>Resistance Exercises</h2>
+<% @resistance_exercises.each do |exercise| %>
+  <p><%= exercise.inspect %></p>
+  <%= link_to 'View', workout_resistance_exercise_path(@workout, exercise) %>
+<% end %>

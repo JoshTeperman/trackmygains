@@ -1,0 +1,5 @@
+<%= content_for :page_title, 'Exercises' %>
+<h1>Cardio Exercises View</h1>
+<% @exercises.each do |exercise| %>
+  <%= exercise.inspect %>
+<% end %>

@@ -1,32 +1,24 @@
 class WorkoutsController < ApplicationController
-  before_action :set_workout, only: [:show, :edit, :update, :destroy]
-
-  def index
-    @workouts = Workout.all
-  end
+  before_action :set_workout, only: [:show, :destroy]
 
   def show
-    @exercises = @workout.exercises
+    @cardio_exercises = @workout.cardio_exercises
+    @resistance_exercises = @workout.resistance_exercises
   end
 
   def new
-    @workout = Workout.new
   end
 
   def edit
   end
 
   def create
-    @workout = Workout.new(workout_params)
+    @workout = Workout.new(start_time: Time.now)
 
-    respond_to do |format|
-      if @workout.save
-        format.html { redirect_to @workout, notice: 'Workout was successfully created.' }
-        format.json { render :show, status: :created, location: @workout }
-      else
-        format.html { render :new }
-        format.json { render json: @workout.errors, status: :unprocessable_entity }
-      end
+    if @workout.save
+      redirect_to @workout, notice: 'Starting new workout!'
+    else
+      render 'new'
     end
   end
 
@@ -51,12 +43,13 @@ class WorkoutsController < ApplicationController
   end
 
   private
+
     def set_workout
-      @workout = Workout.find(params[:id])
+      @workout = Workout.find params[:id]
     end
 
     def workout_params
-      params.require(:workout).permit(:start_time, :finish_time, :state)
+      params.require(:workout).permit(:start_time)
     end
 end
 

@@ -1,0 +1,2 @@
+module Workouts::ResistanceExercisesHelper
+end
