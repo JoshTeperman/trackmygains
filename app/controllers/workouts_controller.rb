@@ -16,8 +16,10 @@ class WorkoutsController < ApplicationController
     @workout = Workout.new(start_time: Time.now)
 
     if @workout.save
-      redirect_to @workout, notice: 'Starting new workout!'
+      flash[:success] = 'Starting new workout!'
+      redirect_to @workout
     else
+      flash[:failure] = 'Failed to create workout'
       render 'new'
     end
   end

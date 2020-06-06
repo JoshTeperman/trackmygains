@@ -2,7 +2,6 @@
 <html>
   <head>
     <%= page_title %>
-
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= render 'layouts/meta_tags' %>
@@ -13,6 +12,7 @@
   </head>
 
   <body>
+    <%= render 'shared/flashes' -%>
     <%= yield %>
   </body>
 </html>
