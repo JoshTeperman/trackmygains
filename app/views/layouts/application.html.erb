@@ -4,9 +4,11 @@
     <%= page_title %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= render 'layouts/meta_tags' %>
+    <%= render 'shared/meta_tags' %>
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
