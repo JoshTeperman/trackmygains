@@ -15,27 +15,31 @@
 /profile/edit
 
 Resources
-- workouts
+- Workouts
   - start_time: datetime
   - finish_time: datetime
   - location: enum (:gym, :outside, :home)
   - longitude: decimal
   - latitude: decimal
   - state: enum (:started, :complete, :paused, :cancelled, :deleted_workouts)
-  - exercises[]
+  - Exercises[]
     - exercisable_type
     - exercisable_id
-    - resistance_exercises[]
-      - name: string
-      - target: enum (:back, :chest, :shoulders, :legs, :core, :biceps, :triceps, :lats)
-      > target can be multiple
-    - cardio_exercises[]
-      - name: string
+    - ResistanceExercises[]
+      - type: ExerciseType
+    - CardioExercises[]
+      - type: ExerciseType
       - start_time: datetime
       - finish_time: datetime
       - total_time: integer(seconds)
       - distance: decimal(km)
+    - CalisthenicExercises[]
+      - type: ExerciseType
 
+    - ExerciseType
+      - name: string
+      - category: enum (:calisthenic, :resistance, :cardio)
+      - targets: Array[:back, :chest, :shoulders, :legs, :core, :biceps, :triceps, :lats]
 
 class Workouts < ApplicationRecord
   has_and_belongs_to_many :exercises
@@ -50,10 +54,20 @@ end
 
 class CardioExercise < ApplicationRecord
   has_many :exercises, as: :exercisable
+  belongs_to :exercise_type
 end
 
 class ResistanceExercise < ApplicationRecord
   has_many :exercises, as: :exercisable
+  belongs_to :exercise_type
+end
+
+class CalisthenicExercise < ApplicationRecord
+  has_many :exercises, as: :exercisable
+  belongs_to :exercise_type
+end
+
+class ExerciseType < ApplicationRecord
 end
 
 
