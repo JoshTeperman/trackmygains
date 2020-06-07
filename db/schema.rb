@@ -10,18 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_24_124718) do
+ActiveRecord::Schema.define(version: 2020_06_07_124641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "cardio_exercises", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
     t.integer "total_time"
     t.datetime "start_time"
     t.datetime "finish_time"
     t.float "distance"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.uuid "exercise_type_id", null: false
+    t.index ["exercise_type_id"], name: "index_cardio_exercises_on_exercise_type_id"
+  end
+
+  create_table "exercise_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "targets", array: true
+    t.string "category"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -41,10 +50,10 @@ ActiveRecord::Schema.define(version: 2020_05_24_124718) do
   end
 
   create_table "resistance_exercises", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
-    t.string "target"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.uuid "exercise_type_id", null: false
+    t.index ["exercise_type_id"], name: "index_resistance_exercises_on_exercise_type_id"
   end
 
   create_table "workouts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -55,4 +64,6 @@ ActiveRecord::Schema.define(version: 2020_05_24_124718) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "cardio_exercises", "exercise_types"
+  add_foreign_key "resistance_exercises", "exercise_types"
 end
