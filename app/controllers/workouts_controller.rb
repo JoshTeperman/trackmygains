@@ -1,12 +1,12 @@
 class WorkoutsController < ApplicationController
-  before_action :set_workout, only: [:show, :destroy]
+  before_action :set_workout, only: [:edit, :show, :destroy]
+
+  def new
+  end
 
   def show
     @cardio_exercises = @workout.cardio_exercises
     @resistance_exercises = @workout.resistance_exercises
-  end
-
-  def new
   end
 
   def edit
