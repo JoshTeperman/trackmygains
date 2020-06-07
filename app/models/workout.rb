@@ -2,6 +2,7 @@ class Workout < ApplicationRecord
   has_and_belongs_to_many :exercises
   has_many :resistance_exercises, through: :exercises, source: :exercisable, source_type: 'ResistanceExercise'
   has_many :cardio_exercises, through: :exercises, source: :exercisable, source_type: 'CardioExercise'
+  has_many :calisthenics_exercises, through: :exercises, source: :exercisable, source_type: 'CalisthenicsExercise'
 
   validates :state, presence: true, inclusion: { in: ['started', 'completed', 'deleted'] }
   validates :start_time, presence: true

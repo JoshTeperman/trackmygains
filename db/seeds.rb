@@ -4,6 +4,7 @@ p 'Seeding Workouts...'
 bench_press = ExerciseType.create!(name: 'Bench Press', targets: ['chest', 'shoulders', 'triceps'], category: :resistance)
 barbell_squat = ExerciseType.create!(name: 'Barbell Squat', targets: ['legs'], category: :resistance)
 rowing_machine = ExerciseType.create!(name: 'Rowing Machine', targets: ['back'], category: :cardio)
+burpees = ExerciseType.create!(name: 'Burpees', targets: [], category: :calisthenics)
 
 # current_workout
 current_workout = Workout.create!(start_time: Time.now)
@@ -23,8 +24,13 @@ completed_workout_resistance_exercise_1 = ResistanceExercise.new
 completed_workout_resistance_exercise_1.exercise_type = barbell_squat
 completed_workout_resistance_exercise_1.save!
 
+completed_workout_calisthenics_exercise = CalisthenicsExercise.new
+completed_workout_calisthenics_exercise.exercise_type = burpees
+completed_workout_calisthenics_exercise.save!
+
 completed_workout.exercises << Exercise.create!(exercisable: completed_workout_cardio_exercise)
 completed_workout.exercises << Exercise.create!(exercisable: completed_workout_resistance_exercise_1)
+completed_workout.exercises << Exercise.create!(exercisable: completed_workout_calisthenics_exercise)
 
 # completed workout 2
 completed_workout_2 = Workout.create!(start_time: 48.hours.ago, finish_time: 45.hours.ago, state: 'completed')
