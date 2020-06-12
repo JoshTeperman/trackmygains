@@ -2,6 +2,6 @@ module Exercisable
   extend ActiveSupport::Concern
 
   included do
-    has_many :exercises, as: :exercisable
+    has_one :exercise, as: :exercisable
   end
 end

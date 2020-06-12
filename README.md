@@ -42,32 +42,33 @@ Resources
       - targets: Array[:back, :chest, :shoulders, :legs, :core, :biceps, :triceps, :lats]
 
 class Workouts < ApplicationRecord
-  has_and_belongs_to_many :exercises
+  has_and_belongs_to_many :exercise_types
+  has_many :exercises
   has_many :resistance_exercises, through: :exercises, source: :exercisable, source_type: 'ResistanceExercise'
   has_many :cardio_exercises, through: :exercises, source: :exercisable, source_type: 'CardioExercise'
+  has_many :calisthenics_exercises, through: :exercises, source: :exercisable, source_type: 'CalisthenicsExercise'
+end
+
+class ExerciseType < ApplicationRecord
+  has_and_belongs_to_many :workouts
 end
 
 class Exercise < ApplicationRecord
   belongs_to :exercisable, polymorphic: true
-  has_and_belongs_to_many :workouts
+  belongs_to :workout
+  belongs_to :exercise_type
 end
 
 class CardioExercise < ApplicationRecord
   has_many :exercises, as: :exercisable
-  belongs_to :exercise_type
 end
 
 class ResistanceExercise < ApplicationRecord
   has_many :exercises, as: :exercisable
-  belongs_to :exercise_type
 end
 
 class CalisthenicExercise < ApplicationRecord
   has_many :exercises, as: :exercisable
-  belongs_to :exercise_type
-end
-
-class ExerciseType < ApplicationRecord
 end
 
 

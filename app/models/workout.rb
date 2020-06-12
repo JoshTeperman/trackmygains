@@ -1,5 +1,7 @@
 class Workout < ApplicationRecord
-  has_and_belongs_to_many :exercises
+  has_many :exercises
+  has_many :exercise_types, through: :exercises
+
   has_many :resistance_exercises, through: :exercises, source: :exercisable, source_type: 'ResistanceExercise'
   has_many :cardio_exercises, through: :exercises, source: :exercisable, source_type: 'CardioExercise'
   has_many :calisthenics_exercises, through: :exercises, source: :exercisable, source_type: 'CalisthenicsExercise'
