@@ -1,14 +1,3 @@
 <%= content_for :page_title, 'Workout' %>
 
-<h2>Cardio Exercises</h2>
-<% @cardio_exercises.each do |exercise| %>
-  <p><%= exercise.inspect %></p>
-  <%= link_to 'View', workout_cardio_exercise_path(@workout, exercise) %>
-<% end %>
-
-
-<h2>Resistance Exercises</h2>
-<% @resistance_exercises.each do |exercise| %>
-  <p><%= exercise.inspect %></p>
-  <%= link_to 'View', workout_resistance_exercise_path(@workout, exercise) %>
-<% end %>
+<%= link_to 'Add Exercise', new_workout_exercise_path(@current_workout) %>

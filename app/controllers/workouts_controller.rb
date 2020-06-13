@@ -1,4 +1,5 @@
 class WorkoutsController < ApplicationController
+  before_action :set_current_workout
   before_action :set_workout, only: [:edit, :show, :destroy]
 
   def new
@@ -42,6 +43,10 @@ class WorkoutsController < ApplicationController
       format.html { redirect_to workouts_url, notice: 'Workout was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def set_current_workout
+    @current_workout ||= Workout.started.last
   end
 
   private
