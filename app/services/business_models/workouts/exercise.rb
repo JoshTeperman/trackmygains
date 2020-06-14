@@ -12,7 +12,7 @@ module BusinessModels
 
       def initialize(args = {})
         super
-        self.category ||= self.exercise_type.category
+        self.category ||= self.exercise_type&.category
       end
     end
   end

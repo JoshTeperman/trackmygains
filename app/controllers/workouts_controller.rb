@@ -9,9 +9,6 @@ class WorkoutsController < ApplicationController
     @exercises = @workout.exercises
   end
 
-  def edit
-  end
-
   def create
     @workout = Workout.new(start_time: Time.now)
 

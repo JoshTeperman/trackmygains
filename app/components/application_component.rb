@@ -1,5 +1,3 @@
-module Components
-  class ApplicationComponent < ViewComponent::Base
-  end
+class ApplicationComponent < ViewComponent::Base
 end
 

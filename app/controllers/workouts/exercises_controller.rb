@@ -1,6 +1,6 @@
 module Workouts
   class ExercisesController < Workouts::MainController
-    before_action: :set_exercise, only: [:edit]
+    before_action :set_exercise, only: [:edit]
 
     def new
       @exercise_form = BusinessModels::Workouts::Exercise.new(workout: @workout)
