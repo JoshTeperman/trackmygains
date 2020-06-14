@@ -1,3 +1,4 @@
 <%= content_for :page_title, 'Workout' %>
 
 <%= link_to 'Add Exercise', new_workout_exercise_path(@current_workout) %>
+<%= render @exercises %>

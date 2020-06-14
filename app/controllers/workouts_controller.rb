@@ -6,8 +6,7 @@ class WorkoutsController < ApplicationController
   end
 
   def show
-    @cardio_exercises = @workout.cardio_exercises
-    @resistance_exercises = @workout.resistance_exercises
+    @exercises = @workout.exercises
   end
 
   def edit
