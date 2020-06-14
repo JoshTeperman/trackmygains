@@ -8,7 +8,18 @@ module Workouts
 
     def create
       exercise_type = ExerciseType.find_by(id: exercise_params[:exercise_type_id])
-      @exercise = BusinessModels::Workouts::Exercise.new(workout: @workout, exercise_type: exercise_type)
+      @exercise_form = BusinessModels::Workouts::Exercise.new(workout: @workout, exercise_type: exercise_type)
+
+      result = Interactors::Exercises::Create.call(exercise_form: @exercise_form)
+
+      if result.success?
+        redirect_to workout_exercise_path(@workout, result.exercise)
+      else
+        render new_workout_exercise_path(@workout)
+      end
+    end
+
+    def show
     end
 
     def edit
