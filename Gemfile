@@ -15,6 +15,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 # custom
 gem 'view_component', '~> 2.9'
+gem 'interactor', '~> 3.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
