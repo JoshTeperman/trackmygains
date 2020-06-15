@@ -1,19 +1,7 @@
 module Workouts
   class CardioExercisesController < Workouts::MainController
-    before_action :set_workout
-
-    def index
-      @exercises = @workout.cardio_exercises
-    end
-
     def show
-      @exercise = CardioExercise.find_by(id: params[:id])
-    end
-
-    private
-
-    def set_workout
-      @workout = Workout.find(params[:workout_id])
+      @exercise = @workout.cardio_exercises.find_by(id: params[:id])
     end
   end
 end

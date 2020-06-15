@@ -13,7 +13,16 @@ module Workouts
       result = Interactors::Exercises::Create.call(exercise_form: @exercise_form)
 
       if result.success?
-        redirect_to workout_exercise_path(@workout, result.exercise)
+        exercise = result.exercise
+
+        case exercise.exercisable_type
+        when 'ResistanceExercise'
+          redirect_to workout_resistance_exercise_path(@workout, exercise.exercisable_id)
+        when 'CardioExercise'
+          redirect_to workout_cardio_exercise_path(@workout, exercise.exercisable_id)
+        when 'CalisthenicsExercise'
+          redirect_to workout_calisthenics_exercise_path(@workout, exercise.exercisable_id)
+        end
       else
         render new_workout_exercise_path(@workout)
       end

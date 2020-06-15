@@ -1,17 +1,8 @@
 module Workouts
   class ResistanceExercisesController < Workouts::MainController
-    before_action :set_exercise, only: [:show]
-
-    def index
-    end
-
     def show
-    end
-
-    private
-
-    def set_exercise
-      @exercise = ResistanceExercise.find(params[:id])
+      @exercise = @workout.resistance_exercises.find_by(id: params[:id])
+      @exercise_type = @exercise.exercise_type
     end
   end
 end
