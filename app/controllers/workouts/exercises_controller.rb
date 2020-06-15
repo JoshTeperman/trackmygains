@@ -20,6 +20,7 @@ module Workouts
     end
 
     def show
+      @exercise = Exercise.find_by(id: params[:id])
     end
 
     def edit

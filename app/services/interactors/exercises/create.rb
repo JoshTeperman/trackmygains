@@ -12,33 +12,18 @@ module Interactors
       end
 
       def call
-        if exercise_form.valid?
-          case category
-          when 'resistance'
-            new_exercise = Exercise.create!(
-              exercisable: ResistanceExercise.new,
-              workout: workout,
-              exercise_type: exercise_type
-            )
-          when 'calisthenics'
-            new_exercise = Exercise.create!(
-              exercisable: CalisthenicsExercise.new,
-              workout: workout,
-              exercise_type: exercise_type
-            )
-          when 'cardio'
-            new_exercise = Exercise.create!(
-              exercisable: ResistanceExercise.new(start_time: Time.current),
-              workout: workout,
-              exercise_type: exercise_type,
-            )
-          else
-            # some type of error message?
-            return context.fail!
-          end
+        return context.fail!(errors: exercise_form.errors) unless exercise_form.valid?
 
-          context.fail! unless new_exercise.save!
+        new_exercise = Exercise.create!(
+          exercisable: class_eval(Exercise::CLASS_NAMES[category]).new,
+          workout: workout,
+          exercise_type: exercise_type
+        )
+
+        if new_exercise.save
           context.exercise = new_exercise
+        else
+          context.fail!(errors: new_exercise.errors)
         end
       end
 
