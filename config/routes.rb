@@ -7,5 +7,8 @@ Rails.application.routes.draw do
       resources :calisthenics_exercises, only: [:show]
     end
   end
+
+  resources :exercise_types, only: [:new, :create]
+
   root to: 'workouts#new'
 end

@@ -1,0 +1,14 @@
+<h2>New Exercise Type</h2>
+
+<%= form_with(model: @exercise_type_form, url: exercise_types_path) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :category %>
+  <%= f.select :category, ExerciseType.categories.keys.map { |k| [k.capitalize, k] }, include_blank: true %>
+
+  <%= f.label :targets %>
+  <%= f.text_field :targets %>
+
+  <%= f.submit 'Create' %>
+<% end %>
