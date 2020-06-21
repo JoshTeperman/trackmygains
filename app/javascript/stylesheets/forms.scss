@@ -1,0 +1,15 @@
+.form-group, {
+  @apply w-full mb-4;
+}
+
+label {
+  @apply mb-2 text-base
+}
+
+.form-control, .input, .select, input, select {
+  @apply w-full p-2;
+
+  &:focus {
+    @apply outline-none;
+  }
+}

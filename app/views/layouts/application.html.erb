@@ -13,8 +13,10 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= render 'shared/flashes' -%>
-    <%= yield %>
+  <body class="h-full min-h-screen font-sans bg-gray-200 box-border">
+    <div class="main flex-1 p-4">
+      <%= render 'shared/flashes' %>
+      <%= yield %>
+    </div>
   </body>
 </html>

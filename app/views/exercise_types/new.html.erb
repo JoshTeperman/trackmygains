@@ -1,14 +1,20 @@
-<h2>New Exercise Type</h2>
+<h1 class="text-xl mb-10">New Exercise Type</h1>
 
 <%= form_with(model: @exercise_type_form, url: exercise_types_path) do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label :name%>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
 
-  <%= f.label :category %>
-  <%= f.select :category, ExerciseType.categories.keys.map { |k| [k.capitalize, k] }, include_blank: true %>
+  <div class="form-group">
+    <%= f.label :category %>
+    <%= f.select :category, ExerciseType.categories.keys.map { |k| [k.capitalize, k] }, include_blank: true, class: 'form-control' %>
+  </div>
 
-  <%= f.label :targets %>
-  <%= f.text_field :targets %>
+  <div class="form-group">
+    <%= f.label :targets %>
+    <%= f.text_field :targets %>
+  </div>
 
-  <%= f.submit 'Create' %>
+  <%= f.submit 'Create', class: "btn mt-8 tracking-wider" %>
 <% end %>
