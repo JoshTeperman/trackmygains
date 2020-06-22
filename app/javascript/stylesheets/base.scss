@@ -2,3 +2,11 @@ body {
   font-size: 16px;
   @apply text-green-900;
 }
+
+a:hover {
+  @apply text-green-900 cursor-pointer;
+}
+
+a:visited {
+  @apply text-green-900;
+}
