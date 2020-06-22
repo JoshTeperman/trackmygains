@@ -1,7 +1,9 @@
 <%= content_for :page_title, 'Workout' %>
 
-<% if @current_workout %>
-  <%= link_to 'Resume Workout', @current_workout, class: 'btn inline-block' %>
-<% else %>
-  <%= link_to 'New Workout', workouts_path, method: :post %>
-<% end %>
+<div class="flex w-full h-full items-center justify-center">
+  <% if @current_workout %>
+    <%= link_to 'Resume Workout', @current_workout, class: 'btn-primary' %>
+  <% else %>
+    <%= link_to 'New Workout', workouts_path, method: :post, class: 'btn-primary' %>
+  <% end %>
+</div>

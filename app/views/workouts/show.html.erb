@@ -1,4 +1,8 @@
 <%= content_for :page_title, 'Workout' %>
 
-<%= link_to 'Add Exercise', new_workout_exercise_path(@current_workout) %>
-<%= render collection: @exercises, partial: 'workouts/exercise' %>
+<div class="page flex flex-col items-center justify-between mt-10 mb-6 overflow-y-scroll px-4">
+  <div class="w-full">
+    <%= render collection: @exercises, partial: 'workouts/exercise' %>
+  </div>
+  <%= link_to 'Add Exercise', new_workout_exercise_path(@current_workout), class: "btn-primary mt-8 " %>
+</div>
