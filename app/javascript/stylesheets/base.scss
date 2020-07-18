@@ -4,9 +4,14 @@ body {
 }
 
 a:hover {
-  @apply text-green-900 cursor-pointer;
+  @apply text-green-900 cursor-pointer bg-transparent;
 }
 
 a:visited {
   @apply text-green-900;
 }
+
+.mh-vh-80 {
+  max-height: 80vh;
+}
+

@@ -3,13 +3,18 @@
 }
 
 label {
-  @apply mb-2 text-base
+  @apply mb-2 text-base;
 }
 
 .form-control, .input, .select, input, select {
-  @apply w-full p-2;
+  @apply w-full p-2 border-green-200;
 
   &:focus {
     @apply outline-none;
   }
+}
+
+select {
+  -moz-appearance: initial;
+  -webkit-appearance: initial;
 }

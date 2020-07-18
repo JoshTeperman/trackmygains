@@ -24,7 +24,7 @@ module Workouts
           redirect_to workout_calisthenics_exercise_path(@workout, exercise.exercisable_id)
         end
       else
-        render new_workout_exercise_path(@workout)
+        render :new
       end
     end
 

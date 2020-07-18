@@ -2,7 +2,7 @@
   <%= f.label :exercise_type_id %>
   <%= f.collection_select :exercise_type_id, ExerciseType.all, :id, :name, include_blank: 'Add exercise...' %>
   <p>search or type to add a new exercise to this workout</p>
-  <%= f.submit 'Add Exercise', class: "btn-primary" %>
+  <%= f.submit 'Add Exercise', class: "btn-primary mb-4" %>
 <% end %>
 <%= link_to 'Create a new type of exercise', new_exercise_type_path %>
 
