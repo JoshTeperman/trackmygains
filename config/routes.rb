@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :workouts, only: [:new, :create, :show, :edit, :update] do
+  resources :workouts do
     scope module: :workouts do
       resources :exercises, only: [:new, :create, :show]
       resources :cardio_exercises, only: [:show]

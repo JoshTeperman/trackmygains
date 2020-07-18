@@ -1,10 +1,8 @@
 <%= content_for :page_title, 'Workout' %>
 
-<div class="page flex flex-col items-center justify-between mt-10 mb-6px-4">
-  <div class="w-full">
+<div class="page flex flex-col items-center justify-between mt-5 mb-6px-4">
+  <%= link_to 'Add Exercise', new_workout_exercise_path(@current_workout), local: true, class: "btn-primary mb-10 z-1 fixed top-0 mt-10 shadow-xl" %>
+  <div class="w-full mt-20">
     <%= render collection: @exercises, partial: 'workouts/exercise', locals: { workout: @workout } %>
-  </div>
-  <div class="fixed bottom-0 mb-10 z-50">
-    <%= link_to 'Add Exercise', new_workout_exercise_path(@current_workout), class: "btn-primary mt-8 " %>
   </div>
 </div>

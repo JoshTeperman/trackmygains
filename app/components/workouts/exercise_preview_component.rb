@@ -1,7 +1,5 @@
 module Workouts
   class ExercisePreviewComponent < ApplicationComponent
-    attr_reader :name, :path
-
     def initialize(exercise:, workout:)
       @exercise = exercise
       @workout = workout
@@ -22,12 +20,6 @@ module Workouts
       end
     end
 
-    def workout
-      @workout
-    end
-
-    def exercise
-      @exercise
-    end
+    attr_reader :name, :path, :workout, :exercise
   end
 end
