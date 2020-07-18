@@ -1,8 +1,12 @@
+<h1 class="text-2xl mb-6">New Exercise</h1>
+
 <%= form_with(model: @exercise_form, url: workout_exercises_path) do |f| %>
-  <%= f.label :exercise_type_id %>
-  <%= f.collection_select :exercise_type_id, ExerciseType.all, :id, :name, include_blank: 'Add exercise...' %>
-  <p>search or type to add a new exercise to this workout</p>
-  <%= f.submit 'Add Exercise', class: "btn-primary mb-4" %>
+  <div class="form-group mb-0">
+    <%= f.label :exercise_type_id %>
+    <%= f.collection_select :exercise_type_id, ExerciseType.all, :id, :name, include_blank: 'Choose...' %>
+    <span class="text-xs text-gray-600 ml-2 mt-1 block italic">search or type to add a new exercise to this workout</span>
+  </div>
+  <%= f.submit 'Add Exercise', class: "btn-primary" %>
 <% end %>
-<%= link_to 'Create a new type of exercise', new_exercise_type_path %>
+<%= link_to 'Create a new type of exercise', new_exercise_type_path, class: 'btn-text w-full text-center inline-block uppercase font-semibold' %>
 

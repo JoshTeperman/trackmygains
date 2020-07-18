@@ -1,5 +1,5 @@
 @mixin btn {
-  @apply rounded-sm px-5 py-3 text-lg font-bold uppercase border-2 shadow-lg inline-block;
+  @apply rounded-sm px-5 py-3 text-lg font-bold uppercase tracking-wider border-2 shadow-lg inline-block;
 }
 
 .btn-primary, .btn-primary:visited {
@@ -14,4 +14,10 @@
   &:active {
     @apply text-green-900 bg-green-500;
   }
+}
+
+.btn-text {
+  @include btn;
+
+  @apply shadow-none tracking-normal border-none
 }

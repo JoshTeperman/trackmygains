@@ -1,13 +1,21 @@
+form {
+  @apply w-full mb-6;
+
+  input[type="submit"] {
+    @apply mt-8;
+  }
+}
+
 .form-group, {
-  @apply w-full mb-4;
+  @apply w-full mb-6;
 }
 
 label {
-  @apply mb-2 text-base;
+  @apply mb-2 ml-2 text-base uppercase tracking-wide ;
 }
 
 .form-control, .input, .select, input, select {
-  @apply w-full p-2 border-green-200;
+  @apply w-full px-2 py-3 border-2 border-green-900 bg-white;
 
   &:focus {
     @apply outline-none;
