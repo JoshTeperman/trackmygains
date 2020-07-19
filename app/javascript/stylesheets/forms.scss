@@ -11,7 +11,7 @@ form {
 }
 
 label {
-  @apply mb-2 ml-2 text-base uppercase tracking-wide ;
+  @apply mb-2 ml-2 text-base uppercase tracking-wide font-bold;
 }
 
 .form-control, .input, .select, input, select {
