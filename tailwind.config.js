@@ -5,7 +5,8 @@ module.exports = {
   },
   variants: {
     borderWidth: ['responsive', 'last'],
-    margin: ['responsive', 'last']
+    margin: ['responsive', 'last'],
+    // transitionProperty: ['responsive', 'hover']
   },
   plugins: [],
 }

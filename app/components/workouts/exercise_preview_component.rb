@@ -1,10 +1,13 @@
 module Workouts
   class ExercisePreviewComponent < ApplicationComponent
+    include ApplicationHelper
+
     def initialize(exercise:, workout:)
       @exercise = exercise
       @workout = workout
       @name = exercise.exercise_type.name
       @path = set_path
+      @close_icon = close_icon
     end
 
     private
@@ -18,6 +21,10 @@ module Workouts
       when 'CalisthenicsExercise'
         Rails.application.routes.url_helpers.workout_calisthenics_exercise_path(workout, exercise.exercisable_id)
       end
+    end
+
+    def close_icon
+      # render_svg('icons/close')
     end
 
     attr_reader :name, :path, :workout, :exercise
