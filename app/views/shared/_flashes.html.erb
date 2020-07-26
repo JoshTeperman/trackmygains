@@ -1,23 +1,26 @@
 <% if flash[:error].present? %>
-  <div class="w-full bg-red-200 py-2 mb-6 flex justify-center items-center shadow-md">
-    <div class="alert alert-error text-red-700 font-semibold text-sm">
+  <div class="alert alert-error flex justify-between w-full bg-red-200 p-2 mb-6 items-center shadow-md">
+    <div class="text-red-700 font-semibold text-sm">
       <%= flash[:error] %>
     </div>
+    <%= render_svg('icons/close', size: '2xsmall', class: 'fill-current text-red-700') %>
   </div>
 <% end %>
 
 <% if flash[:notice].present? %>
-  <div class="w-full bg-yellow-200 py-2 mb-6 flex justify-center items-center">
-    <div class="alert alert-notice text-orange-600 font-semibold text-sm">
+  <div class="alert alert-notice flex justify-between w-full bg-yellow-200 p-2 mb-6 items-center shadow-md">
+    <div class="text-orange-600 font-semibold text-sm">
       <%= flash[:notice] %>
     </div>
+    <%= render_svg('icons/close', size: '2xsmall', class: 'fill-current text-orange-600') %>
   </div>
 <% end %>
 
 <% if flash[:success].present? %>
-  <div class="w-full bg-blue-200 py-2 mb-6 flex justify-center items-center">
-    <div class="alert alert-success text-blue-800 font-semibold text-sm">
+  <div class="alert alert-success flex justify-between w-full bg-blue-200 p-2 mb-6 items-center shadow-md">
+    <div class="text-blue-800 font-semibold text-sm">
       <%= flash[:success] %>
     </div>
+    <%= render_svg('icons/close', size: '2xsmall', class: 'fill-current text-blue-800') %>
   </div>
 <% end %>

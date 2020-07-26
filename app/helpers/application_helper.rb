@@ -1,6 +1,7 @@
 module ApplicationHelper
   def render_svg(name, options = {})
     size_classes = {
+      '2xsmall': '1.25rem * 1.25rem',
       'xsmall': '2rem * 2rem',
       'small': '3rem * 3rem',
       'medium': '6rem * 6rem',
