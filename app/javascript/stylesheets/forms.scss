@@ -6,7 +6,7 @@ form {
   }
 }
 
-.form-group, {
+.form-group {
   @apply w-full mb-6;
 }
 
@@ -25,4 +25,15 @@ label {
 select {
   -moz-appearance: initial;
   -webkit-appearance: initial;
+}
+
+.field_with_errors {
+  padding: 0;
+  width: 100%;
+  background-color: inherit;
+  display: inherit;
+
+  input, select {
+    @apply border-red-600 border-2;
+  }
 }

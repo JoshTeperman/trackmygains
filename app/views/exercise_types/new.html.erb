@@ -1,6 +1,7 @@
 <h1 class="text-2xl mb-6">New Exercise Type</h1>
 
-<%= form_with(model: @exercise_type_form, url: exercise_types_path) do |f| %>
+<%= form_with(model: @exercise_type_form, url: exercise_types_path, local: true) do |f| %>
+  <%= render 'shared/form_errors', object: @exercise_type_form %>
   <div class="form-group">
     <%= f.label :name%>
     <%= f.text_field :name, class: 'form-control' %>
