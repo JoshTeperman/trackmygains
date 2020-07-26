@@ -1,3 +1,4 @@
+p 'Seeding...'
 exercise_types = [
   { name: 'Front Squat', category: :resistance, targets: ['legs'] },
   { name: 'Pushup', category: :calisthenics, targets: ['shoulders', 'chest', 'triceps', 'core'] },
@@ -8,4 +9,7 @@ exercise_types = [
   { name: 'Row', category: :cardio, targets: ['back, core'] }
 ].freeze
 
-exercise_types.each { |exercise_type| ExerciseType.create!(exercise_type) }
+exercise_types.each do |exercise_type|
+  p 'Seeding Exercise Type'
+  ExerciseType.create!(exercise_type)
+end

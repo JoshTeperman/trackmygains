@@ -18,7 +18,7 @@ module BusinessModels
     private
 
     def unique?
-      errors.add(:base, 'Exercise Type already exists') if ::ExerciseType.find_by(name: name, category: category).present?
+      errors.add(:base, 'Exercise Type already exists') if ::ExerciseType.where('name ilike ? AND category = ?', name, category).present?
     end
   end
 end
