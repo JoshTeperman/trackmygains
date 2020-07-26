@@ -14,7 +14,7 @@ module Interactors
         if new_exercise_type.save
           context.exercise_type = new_exercise_type
         else
-          context.fail!(errors: new_exercise.errors)
+          context.fail!(error: 'Failed to create exercise type')
         end
       end
     end
