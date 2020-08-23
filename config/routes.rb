@@ -10,5 +10,6 @@ Rails.application.routes.draw do
 
   resources :exercise_types, only: [:new, :create]
 
-  root to: 'workouts#new'
+  get '/activity', to: 'workouts#index'
+  root to: 'workouts#index'
 end

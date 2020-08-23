@@ -2,6 +2,10 @@ class WorkoutsController < ApplicationController
   before_action :set_current_workout
   before_action :set_workout, only: [:edit, :show, :destroy]
 
+  def index
+    @workouts = Workout.order(start_time: :desc)
+  end
+
   def new
   end
 
