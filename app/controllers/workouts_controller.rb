@@ -1,6 +1,6 @@
 class WorkoutsController < ApplicationController
   before_action :set_current_workout
-  before_action :set_workout, only: [:edit, :show, :destroy]
+  before_action :set_workout, only: [:show, :destroy]
 
   def index
     @workouts = Workout.order(start_time: :desc)
@@ -22,18 +22,6 @@ class WorkoutsController < ApplicationController
     else
       flash[:failure] = 'Failed to create workout'
       render 'new'
-    end
-  end
-
-  def update
-    respond_to do |format|
-      if @workout.update(workout_params)
-        format.html { redirect_to @workout, notice: 'Workout was successfully updated.' }
-        format.json { render :show, status: :ok, location: @workout }
-      else
-        format.html { render :edit }
-        format.json { render json: @workout.errors, status: :unprocessable_entity }
-      end
     end
   end
 
