@@ -6,10 +6,9 @@
     <%= link_to 'Resume', workout_path(@current_workout), class: 'btn-primary' %>
   </div>
 <% end %>
-<div class="page flex flex-col items-center justify-between mt-5 mb-6px-4">
-  <ul>
-    <% @workouts.each do |workout| %>
-      <li><%= workout.start_time.to_s(:short) %></li>
-    <% end %>
-  </ul>
+<div class="page flex flex-col items-center justify-between p-4">
+  <% if @workouts.present? %>
+    <%= render Workouts::SummaryComponent.with_collection(@workouts) %>
+  <% else %>
+  <% end %>
 </div>
