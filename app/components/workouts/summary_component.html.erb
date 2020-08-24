@@ -2,9 +2,9 @@
   <div class='flex justify-between'>
     <p><%= start_time %></p>
     <div class="flex">
-      <p class='mr-2'>2km</p>
-      <p class='mr-2'>843kg</p>
-      <p>15 sets</p>
+      <p class='mr-2'><%= total_distance %></p>
+      <p class='mr-2'><%= total_weight %></p>
+      <p><%= total_sets %></p>
     </div>
   </div>
   <p class='text-xs'><%= duration %></p>
@@ -14,7 +14,7 @@
         <% exercises.each do |exercise| %>
           <li class="flex mb-1">
             <p class='text-lg w-1/2'><%= exercise.name %></p>
-            <p class="w-1/2">2km</p>
+            <p class="w-1/2"><%= exercise_detail(exercise) %></p>
           </li>
         <% end %>
       </ul>
