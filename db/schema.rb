@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_12_131523) do
+ActiveRecord::Schema.define(version: 2020_08_25_142301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -28,6 +28,16 @@ ActiveRecord::Schema.define(version: 2020_06_12_131523) do
     t.float "distance"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "exercise_sets", force: :cascade do |t|
+    t.integer "weight"
+    t.integer "goal_reps"
+    t.integer "reps"
+    t.uuid "exercise_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["exercise_id"], name: "index_exercise_sets_on_exercise_id"
   end
 
   create_table "exercise_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -63,6 +73,7 @@ ActiveRecord::Schema.define(version: 2020_06_12_131523) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "exercise_sets", "exercises"
   add_foreign_key "exercises", "exercise_types"
   add_foreign_key "exercises", "workouts"
 end
