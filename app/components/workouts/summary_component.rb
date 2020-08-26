@@ -48,12 +48,17 @@ class Workouts::SummaryComponent < ApplicationComponent
   end
 
   def total_weight
-    return if workout.resistance_exercises.blank?
+    sets = ExerciseSet.joins(exercise: :workout).merge(Workout.where(id: workout.id))
+    return if sets.empty? || workout.resistance_exercises.blank?
 
-    '843kg'
+    weight = sets.pluck(:weight, :reps)
+    content_tag(:p, "548 kg", class: 'mr-2')
   end
 
   def total_sets
-    '15 sets'
+    sets = ExerciseSet.joins(exercise: :workout).merge(Workout.where(id: workout.id))
+    return if sets.empty?
+
+    content_tag(:p, "#{sets.count} sets")
   end
 end
