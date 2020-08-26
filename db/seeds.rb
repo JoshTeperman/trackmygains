@@ -75,7 +75,6 @@ completed_workout_resistance_exercises.each_with_index do |resistance_exercise, 
   end
 end
 
-
 p 'Calisthenics exercises...'
 completed_workout_calisthenics_exercises = Array.new(2) { CalisthenicsExercise.create! }
 

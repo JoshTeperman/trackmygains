@@ -15,7 +15,7 @@ class Workouts::SummaryComponent < ApplicationComponent
     finish_time = workout.finish_time || Time.current
     seconds = finish_time - workout.start_time
     minutes = (seconds / 60).to_i
-    "#{minutes} minutes"
+    "#{pluralize(minutes, 'minute')}"
   end
 
   def exercise_detail(exercise)
