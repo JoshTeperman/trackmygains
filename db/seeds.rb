@@ -17,6 +17,8 @@ CALISTHENICS_EXERCISE_TYPES = [
   { name: 'Squat', category: :calisthenics, targets: ['legs'] },
   { name: 'Box Jump', category: :calisthenics, targets: ['legs'] },
 ].freeze
+EXERCISE_GOAL_REPS = [5, 10, 15, 20].freeze
+EXERCISE_WEIGHTS = (2..100).step(2).to_a
 
 p 'Seeding Cardio Exercise Types'
 cardio_exercise_types = CARDIO_EXERCISE_TYPES.map do |exercise_type|
@@ -57,21 +59,40 @@ completed_workout.exercises.create(
 p 'Resistance exercises...'
 completed_workout_resistance_exercises = Array.new(3) { ResistanceExercise.create! }
 
-completed_workout_resistance_exercises.each_with_index do |exercise, index|
-  completed_workout.exercises.create(
-    exercisable: exercise,
-    exercise_type: resistance_exercise_types[index]
+completed_workout_resistance_exercises.each_with_index do |resistance_exercise, index|
+  new_exercise = completed_workout.exercises.create(
+    exercisable: resistance_exercise,
+    exercise_type: resistance_exercise_types[index],
   )
+
+  rand(1..5).times do
+    reps = EXERCISE_GOAL_REPS.sample
+    new_exercise.exercise_sets.create!(
+      weight: EXERCISE_WEIGHTS.sample,
+      goal_reps: reps,
+      reps: reps
+    )
+  end
 end
+
 
 p 'Calisthenics exercises...'
 completed_workout_calisthenics_exercises = Array.new(2) { CalisthenicsExercise.create! }
 
-completed_workout_calisthenics_exercises.shuffle.each_with_index do |exercise, index|
-  completed_workout.exercises.create(
-    exercisable: exercise,
+completed_workout_calisthenics_exercises.shuffle.each_with_index do |calisthenics_exercise, index|
+  new_exercise = completed_workout.exercises.create(
+    exercisable: calisthenics_exercise,
     exercise_type: calisthenics_exercise_types[index]
   )
+
+  rand(1..5).times do
+    reps = EXERCISE_GOAL_REPS.sample
+    new_exercise.exercise_sets.create!(
+      weight: EXERCISE_WEIGHTS.sample,
+      goal_reps: reps,
+      reps: reps
+    )
+  end
 end
 
 
