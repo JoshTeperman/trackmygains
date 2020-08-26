@@ -21,11 +21,17 @@ class Workouts::SummaryComponent < ApplicationComponent
   def exercise_detail(exercise)
     case exercise.exercisable_type
     when 'CalisthenicsExercise'
-      '5 sets, 100 reps'
+      set_count = exercise.exercise_sets.count
+      rep_count = exercise.exercise_sets.pluck(:reps).inject(:+)
+      "#{pluralize(set_count, 'set')}, #{rep_count} reps"
     when 'ResistanceExercise'
-      '5 sets, 75kg max'
+      set_count = exercise.exercise_sets.count
+      max_weight = exercise.exercise_sets.pluck(:weight).max
+      "#{pluralize(set_count, 'set')}, max #{max_weight} kg"
     when 'CardioExercise'
-      "2km in 10'12\""
+      cardio_exercise = CardioExercise.find_by(id: exercise.exercisable_id)
+      total_time = ((cardio_exercise.finish_time - cardio_exercise.start_time).seconds / 60).to_i
+      "#{cardio_exercise.distance} km in #{total_time} minutes"
     end
   end
 
