@@ -3,5 +3,7 @@ module Exercisable
 
   included do
     has_one :exercise, as: :exercisable, dependent: :destroy
+    has_one :exercise_type, through: :exercise
+    has_many :exercise_sets, through: :exercise
   end
 end
