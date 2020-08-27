@@ -16,6 +16,12 @@ class Workout < ApplicationRecord
     deleted: 'deleted'
   }
 
+  def duration_in_seconds
+    return (Time.current - start_time) if finish_time.nil?
+
+    finish_time - start_time
+  end
+
   private
 
   def finish_time_is_after_start_time

@@ -12,10 +12,18 @@ class Workouts::SummaryComponent < ApplicationComponent
   attr_reader :workout, :start_time, :exercises
 
   def duration
-    finish_time = workout.finish_time || Time.current
-    seconds = finish_time - workout.start_time
-    minutes = (seconds / 60).to_i
-    "#{pluralize(minutes, 'minute')}"
+    duration = workout.duration_in_seconds
+    duration < 1.hour.seconds ? "#{duration / 60} minutes" : duration_in_hours(duration)
+  end
+
+  def duration_in_hours(duration)
+    hours = (duration / 1.hour.seconds).round
+    minutes = ((duration % 1.hour.seconds) / 60.seconds).round
+
+    duration = "#{pluralize(hours, 'hour')}"
+    duration.concat(", #{pluralize(minutes, 'minute')}") if minutes.positive?
+
+    duration
   end
 
   def exercise_detail(exercise)
