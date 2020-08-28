@@ -1,25 +1,25 @@
-<div class="flex flex-col border-2 border-green-800 bg-white w-full p-4 mb-4">
-  <div class='flex justify-between'>
-    <p><%= start_time %></p>
-    <div class="flex">
-      <p class='mr-2'><%= total_distance %></p>
-      <%= total_weight %>
-      <%= total_sets %>
+<%= link_to workout_path(workout), class: "flex flex-col border-2 border-green-800 bg-white w-full p-4 mb-4 hover:bg-gray-400 cursor-pointer transition-colors ease-out duration-150" do %>
+  <div class="">
+    <div class='flex justify-between'>
+      <p><%= start_time %></p>
+      <div class="flex">
+        <p class='mr-2'><%= total_distance %></p>
+        <%= total_weight %>
+        <%= total_sets %>
+      </div>
+    </div>
+    <p class='text-xs'><%= workout_duration %></p>
+    <div class="flex flex-col mt-4">
+      <% if exercises.present? %>
+        <ul>
+          <% exercises.each do |exercise| %>
+            <li class="flex mb-1">
+              <p class='text-lg w-1/2'><%= exercise.name %></p>
+              <p class="w-1/2"><%= exercise_detail(exercise) %></p>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
     </div>
   </div>
-  <p class='text-xs'><%= workout_duration %></p>
-  <div class="flex flex-col mt-4">
-    <% if exercises.present? %>
-      <ul>
-        <% exercises.each do |exercise| %>
-          <li class="flex mb-1">
-            <p class='text-lg w-1/2'><%= exercise.name %></p>
-            <p class="w-1/2"><%= exercise_detail(exercise) %></p>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
-  </div>
-</div>
-
-
+<% end %>
