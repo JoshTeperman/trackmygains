@@ -87,7 +87,6 @@ completed_workout_calisthenics_exercises.shuffle.each_with_index do |calisthenic
   rand(1..5).times do
     reps = EXERCISE_GOAL_REPS.sample
     new_exercise.exercise_sets.create!(
-      weight: EXERCISE_WEIGHTS.sample,
       goal_reps: reps,
       reps: reps
     )

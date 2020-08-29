@@ -5,9 +5,9 @@ module Workouts
     def initialize(exercise:, workout:)
       @exercise = exercise
       @workout = workout
+      @exercise_sets = exercise.exercise_sets
       @name = exercise.exercise_type.name
       @path = set_path
-      @close_icon = close_icon
     end
 
     private
@@ -23,10 +23,6 @@ module Workouts
       end
     end
 
-    def close_icon
-      # render_svg('icons/close')
-    end
-
-    attr_reader :name, :path, :workout, :exercise
+    attr_reader :name, :path, :workout, :exercise, :exercise_sets
   end
 end
