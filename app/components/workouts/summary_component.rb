@@ -31,14 +31,16 @@ class Workouts::SummaryComponent < ApplicationComponent
   end
 
   def exercise_detail(exercise)
+    sets = exercise.sets
+
     case exercise.exercisable_type
     when 'CalisthenicsExercise'
-      set_count = exercise.exercise_sets.count
-      rep_count = exercise.exercise_sets.pluck(:reps).inject(:+)
+      set_count = sets.count
+      rep_count = sets.pluck(:reps).inject(:+)
       set_count.positive? ? "#{pluralize(set_count, 'set')}, #{rep_count} reps" : 'No sets yet'
     when 'ResistanceExercise'
-      set_count = exercise.exercise_sets.count
-      max_weight = exercise.exercise_sets.pluck(:weight).max
+      set_count = sets.count
+      max_weight = sets.pluck(:weight).max
       set_count.positive? ? "#{pluralize(set_count, 'set')}, max #{max_weight} kg" : 'No sets yet'
     when 'CardioExercise'
       cardio_exercise = CardioExercise.find_by(id: exercise.exercisable_id)

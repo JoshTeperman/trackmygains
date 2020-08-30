@@ -1,9 +1,6 @@
-<div class='flex flex-col items-center mr-4'>
+<div class='flex flex-col items-center mr-4 mt-4'>
   <div>
-    <span class='text-3xl'><%= weight %></span>
-    <% if set.weight.present? %>
-      <span>kg</span>
-    <% end %>
+    <%= main_metric %>
   </div>
-  <span class='text-xs uppercase'><%= sets_and_reps %></span>
+  <%= sub_metric %>
 </div>

@@ -2,10 +2,10 @@
   <%= render_svg('icons/close', size: 'xsmall', class: 'fill-current text-green-900 absolute top-0 right-0 m-2 hover:bg-gray-500') %>
   <div class="flex flex-col">
     <div class="flex justify-between">
-      <h2 class="text-2xl uppercase font-medium"><%= name %></h2>
+      <h2 class="text-2xl uppercase font-medium mb-2"><%= name %></h2>
     </div>
-    <div class="flex mt-5">
-      <%= render Workouts::SetSummaryComponent.with_collection(exercise_sets) %>
+    <div class="flex flex-wrap">
+      <%= render Workouts::SetSummaryComponent.with_collection(sets, exercise: exercise) %>
     </div>
   </div>
 <% end %>

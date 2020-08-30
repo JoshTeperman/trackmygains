@@ -5,6 +5,7 @@ class Exercise < ApplicationRecord
   has_many :exercise_sets
 
   delegate :name, to: :exercise_type
+  alias :sets :exercise_sets
 
   CLASS_NAMES = {
     'resistance' => 'ResistanceExercise',

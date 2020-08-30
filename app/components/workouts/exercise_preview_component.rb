@@ -5,7 +5,7 @@ module Workouts
     def initialize(exercise:, workout:)
       @exercise = exercise
       @workout = workout
-      @exercise_sets = exercise.exercise_sets
+      @sets = exercise.sets
       @name = exercise.exercise_type.name
       @path = set_path
     end
@@ -23,6 +23,6 @@ module Workouts
       end
     end
 
-    attr_reader :name, :path, :workout, :exercise, :exercise_sets
+    attr_reader :name, :path, :workout, :exercise, :sets
   end
 end
