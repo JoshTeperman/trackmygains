@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_25_142301) do
+ActiveRecord::Schema.define(version: 2020_08_30_071417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -22,10 +22,6 @@ ActiveRecord::Schema.define(version: 2020_08_25_142301) do
   end
 
   create_table "cardio_exercises", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.integer "total_time"
-    t.datetime "start_time"
-    t.datetime "finish_time"
-    t.float "distance"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -34,6 +30,9 @@ ActiveRecord::Schema.define(version: 2020_08_25_142301) do
     t.integer "weight"
     t.integer "goal_reps"
     t.integer "reps"
+    t.float "distance"
+    t.datetime "start_time"
+    t.datetime "finish_time"
     t.uuid "exercise_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
