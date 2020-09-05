@@ -25,14 +25,6 @@ class WorkoutsController < ApplicationController
     end
   end
 
-  def destroy
-    @workout.destroy
-    respond_to do |format|
-      format.html { redirect_to workouts_url, notice: 'Workout was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
   def set_current_workout
     @current_workout ||= Workout.started.last
   end

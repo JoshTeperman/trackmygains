@@ -1,7 +1,7 @@
 <%= content_for :page_title, 'Workout' %>
 <div class="flex flex-col items-center justify-between mt-5 px-4 mb-6">
   <div class="w-full h-auto">
-    <%= render collection: @exercises, partial: 'workouts/exercise', locals: { workout: @workout } %>
+    <%= render Workouts::ExercisePreviewComponent.with_collection(@exercises, workout: @workout) %>
   </div>
   <% if @current_workout.present? %>
     <%= link_to 'Add Exercise', new_workout_exercise_path(@current_workout), local: true, class: "btn-primary mt-8 mb-10 z-1 shadow-xl" %>

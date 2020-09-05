@@ -1,5 +1,5 @@
 @mixin btn {
-  @apply rounded-sm px-5 py-3 text-lg font-bold uppercase tracking-wider border-2 shadow-lg inline-block text-center w-fit-content;
+  @apply px-5 py-3 text-lg font-bold uppercase tracking-wider border-2 shadow-lg inline-block text-center w-fit-content;
 }
 
 .btn-primary, .btn-primary:visited {
