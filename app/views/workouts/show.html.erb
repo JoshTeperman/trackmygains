@@ -1,6 +1,6 @@
 <%= content_for :page_title, 'Workout' %>
-<div class="page flex flex-col items-center justify-between mt-5 px-4 mb-6px-4">
-  <div class="w-full h-auto mh-vh-80 overflow-y-auto border-b-2 border-green-800">
+<div class="flex flex-col items-center justify-between mt-5 px-4 mb-6">
+  <div class="w-full h-auto">
     <%= render collection: @exercises, partial: 'workouts/exercise', locals: { workout: @workout } %>
   </div>
   <% if @current_workout.present? %>

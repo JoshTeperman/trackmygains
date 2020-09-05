@@ -12,22 +12,6 @@ class Workouts::SummaryComponent < ApplicationComponent
   attr_reader :workout, :start_time, :exercises
 
   def workout_duration
-    readable_duration(workout)
-  end
-
-  def readable_duration(obj)
-    duration = obj.duration_in_seconds
-    duration < 1.hour.seconds ? "#{(duration / 60).round} minutes" : duration_in_hours(duration)
-  end
-
-  def duration_in_hours(duration)
-    hours = (duration / 1.hour.seconds).round
-    minutes = ((duration % 1.hour.seconds) / 60.seconds).round
-
-    duration = "#{pluralize(hours, 'hour')}"
-    duration.concat(", #{pluralize(minutes, 'minute')}") if minutes.positive?
-
-    duration
   end
 
   def exercise_detail(exercise)
@@ -35,28 +19,20 @@ class Workouts::SummaryComponent < ApplicationComponent
 
     case exercise.exercisable_type
     when 'CalisthenicsExercise'
-      set_count = sets.count
-      rep_count = sets.pluck(:reps).inject(:+)
-      set_count.positive? ? "#{pluralize(set_count, 'set')}, #{rep_count} reps" : 'No sets yet'
     when 'ResistanceExercise'
-      set_count = sets.count
-      max_weight = sets.pluck(:weight).max
-      set_count.positive? ? "#{pluralize(set_count, 'set')}, max #{max_weight} kg" : 'No sets yet'
     when 'CardioExercise'
-      cardio_exercise = CardioExercise.find_by(id: exercise.exercisable_id)
-      return "#{exercise.name} not recorded yet" if cardio_exercise.distance.blank?
-      "#{cardio_exercise.distance} km in #{readable_duration(cardio_exercise)}"
     end
   end
+
 
   def total_distance
     return if workout.cardio_exercises.blank?
 
-    distances = workout.cardio_exercises.pluck(:distance).compact
+    distances = workout.exercises.flat_map(&:exercise_sets).pluck(:distance).compact
     return if distances.blank?
 
     total = distances .map { |d| BigDecimal(d, 2) }
-                      .reduce(:+)
+                      .sum
 
     "#{total}km"
   end

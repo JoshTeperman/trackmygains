@@ -46,14 +46,17 @@ completed_workout = Workout.create!(
 p 'Seeding completed Workout Exercises'
 
 p 'Cardio exercise...'
-completed_workout_cardio_exercise = CardioExercise.create!(
+completed_workout_cardio_exercise = CardioExercise.create!
+
+new_cardio_exercise = completed_workout.exercises.create(
+  exercisable: completed_workout_cardio_exercise,
+  exercise_type: cardio_exercise_types.sample
+)
+
+new_cardio_exercise.exercise_sets.create!(
   start_time: completed_workout.start_time,
   finish_time: (completed_workout.start_time + 1.hour),
   distance: 1.2,
-)
-completed_workout.exercises.create(
-  exercisable: completed_workout_cardio_exercise,
-  exercise_type: cardio_exercise_types.sample
 )
 
 p 'Resistance exercises...'

@@ -14,7 +14,7 @@ class Workouts::SetSummaryComponent < ApplicationComponent
   def main_metric
     metric = set.weight if exercise_type == 'ResistanceExercise'
     metric = set.reps if exercise_type == 'CalisthenicsExercise'
-    metric = exercise.exercisable.distance if exercise_type == 'CardioExercise'
+    metric = set.distance if exercise_type == 'CardioExercise'
 
     content = content_tag(:span, metric, class: 'text-3xl')
 
