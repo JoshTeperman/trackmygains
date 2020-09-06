@@ -12,4 +12,8 @@ class Exercise < ApplicationRecord
     'calisthenics' => 'CalisthenicsExercise',
     'cardio' => 'CardioExercise'
   }.freeze
+
+  def total_reps
+    sets.pluck(:reps).sum
+  end
 end

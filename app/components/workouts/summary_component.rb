@@ -16,11 +16,15 @@ class Workouts::SummaryComponent < ApplicationComponent
 
   def exercise_detail(exercise)
     sets = exercise.sets
+    reps = sets.pluck(:reps).compact.sum
 
     case exercise.exercisable_type
     when 'CalisthenicsExercise'
+      "#{pluralize(sets.count, 'set')}, #{exercise.total_reps} reps"
     when 'ResistanceExercise'
+      "#{pluralize(sets.count, 'set')}, #{exercise.exercisable.total_kg}kg"
     when 'CardioExercise'
+      '2km in 3:00'
     end
   end
 
