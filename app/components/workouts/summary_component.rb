@@ -1,9 +1,10 @@
 class Workouts::SummaryComponent < ApplicationComponent
+  include LocalTimeHelper
   with_collection_parameter :workout
 
   def initialize(workout:)
     @workout = workout
-    @start_time = workout.start_time.strftime("%d %b %-l:%M%P")
+    @start_time = local_time(workout.start_time, '%d %b %-l:%M%P')
     @exercises = workout.exercises.order(created_at: :desc)
   end
 
