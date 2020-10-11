@@ -4,8 +4,12 @@
     <div class="flex justify-between">
       <h2 class="text-2xl uppercase font-medium mb-2"><%= name %></h2>
     </div>
-    <div class="flex flex-wrap">
-      <%= render Workouts::SetSummaryComponent.with_collection(sets, exercise: exercise) %>
-    </div>
+    <% if sets.present? %>
+      <div class="flex flex-wrap">
+        <%= render Workouts::SetSummaryComponent.with_collection(sets, exercise: exercise) %>
+      </div>
+    <% else %>
+      <p>No sets added yet</p>
+    <% end %>
   </div>
 <% end %>

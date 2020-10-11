@@ -17,6 +17,7 @@ class Workouts::SummaryComponent < ApplicationComponent
 
   def exercise_detail(exercise)
     sets = exercise.sets
+    return 'No sets added yet' if sets.blank?
     reps = sets.pluck(:reps).compact.sum
 
     case exercise.exercisable_type

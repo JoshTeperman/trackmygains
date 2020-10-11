@@ -57,6 +57,8 @@ new_cardio_exercise.exercise_sets.create!(
   start_time: completed_workout.start_time,
   finish_time: (completed_workout.start_time + 1.hour),
   distance: 1.2,
+  goal_reps: 1,
+  reps: 1
 )
 
 p 'Resistance exercises...'
@@ -96,5 +98,38 @@ completed_workout_calisthenics_exercises.shuffle.each_with_index do |calisthenic
   end
 end
 
+p 'Seeding current workout...'
 
+current_workout = Workout.create!(
+  start_time: 2.minutes.ago,
+  state: :started
+)
+
+p 'Seeding current Workout Exercises'
+
+p 'Resistance exercise...'
+current_workout_resistance_exercise = ResistanceExercise.create!
+
+new_exercise = current_workout.exercises.create(
+  exercisable: current_workout_resistance_exercise,
+  exercise_type: resistance_exercise_types.sample
+)
+
+rand(1..5).times do
+  reps = EXERCISE_GOAL_REPS.sample
+  new_exercise.exercise_sets.create!(
+    weight: EXERCISE_WEIGHTS.sample,
+    goal_reps: reps,
+    reps: reps
+  )
+end
+
+p 'Calisthenics exercises...'
+
+current_workout_calisthenics_exercise = CalisthenicsExercise.create!
+
+new_exercise = current_workout.exercises.create(
+  exercisable: current_workout_calisthenics_exercise,
+  exercise_type: calisthenics_exercise_types.sample
+)
 
