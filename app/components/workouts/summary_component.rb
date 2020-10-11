@@ -24,10 +24,10 @@ class Workouts::SummaryComponent < ApplicationComponent
     when 'ResistanceExercise'
       "#{pluralize(sets.count, 'set')}, #{exercise.exercisable.total_kg}kg"
     when 'CardioExercise'
-      '2km in 3:00'
+      total_seconds = exercise.exercisable.total_seconds
+      "#{exercise.exercisable.total_km}km in #{TimeFormatter.in_hours_minutes_seconds(total_seconds)}"
     end
   end
-
 
   def total_distance
     return if workout.cardio_exercises.blank?
