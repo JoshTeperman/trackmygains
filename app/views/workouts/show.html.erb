@@ -1,5 +1,5 @@
 <%= content_for :page_title, 'Workout' %>
-<div class="flex flex-col items-center justify-between mt-5 px-4 mb-6">
+<div class="flex flex-col items-center justify-between mb-6">
   <div class="w-full h-auto">
     <%= render Workouts::ExercisePreviewComponent.with_collection(@exercises, workout: @workout) %>
   </div>
