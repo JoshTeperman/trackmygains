@@ -4,22 +4,22 @@ class Workouts::SetSummaryComponent < ApplicationComponent
   def initialize(set:, exercise:)
     @set = set
     @exercise = exercise
-    @exercise_type = exercise.exercisable_type
+    @category = exercise.category
   end
 
   private
 
-  attr_reader :set, :exercise, :exercise_type
+  attr_reader :set, :exercise, :category
 
   def main_metric
-    metric = set.weight if exercise_type == 'ResistanceExercise'
-    metric = set.reps if exercise_type == 'CalisthenicsExercise'
-    metric = set.distance if exercise_type == 'CardioExercise'
+    metric = set.weight if category == 'resistance'
+    metric = set.reps if category == 'calisthenics'
+    metric = set.distance if category == 'cardio'
 
     content = content_tag(:span, metric, class: 'text-3xl')
 
-    content.concat(content_tag(:span, "kg")) if exercise_type == 'ResistanceExercise'
-    content.concat(content_tag(:span, "km")) if exercise_type == 'CardioExercise'
+    content.concat(content_tag(:span, "kg")) if category == 'resistance'
+    content.concat(content_tag(:span, "km")) if category == 'cardio'
 
     content
   end

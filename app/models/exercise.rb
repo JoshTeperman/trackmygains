@@ -4,7 +4,7 @@ class Exercise < ApplicationRecord
   belongs_to :exercisable, polymorphic: true
   has_many :exercise_sets
 
-  delegate :name, to: :exercise_type
+  delegate :name, :category, to: :exercise_type
   alias :sets :exercise_sets
 
   CLASS_NAMES = {
