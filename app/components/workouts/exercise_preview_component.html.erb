@@ -6,7 +6,9 @@
     </div>
     <% if sets.present? %>
       <div class="flex flex-wrap">
-        <%= render Workouts::SetSummaryComponent.with_collection(sets, exercise: exercise) %>
+        <% sets_data.each do |set| %>
+          <%= render Workouts::SetSummaryComponent.new(exercise: exercise, **set) %>
+        <% end %>
       </div>
     <% else %>
       <p>No sets added yet</p>

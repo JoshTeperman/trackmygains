@@ -1,22 +1,18 @@
 class Workouts::SetSummaryComponent < ApplicationComponent
-  with_collection_parameter :set
-
-  def initialize(set:, exercise:)
-    @set = set
+  def initialize(exercise:, weight:, reps:, count:)
     @exercise = exercise
+    @weight = weight
+    @reps = reps
+    @count = count
     @category = exercise.category
   end
 
   private
 
-  attr_reader :set, :exercise, :category
+  attr_reader :exercise, :weight, :reps, :count, :category
 
   def main_metric
-    metric = set.weight if category == 'resistance'
-    metric = set.reps if category == 'calisthenics'
-    metric = set.distance if category == 'cardio'
-
-    content = content_tag(:span, metric, class: 'text-3xl')
+    content = content_tag(:span, "#{weight}", class: 'text-3xl')
 
     content.concat(content_tag(:span, "kg")) if category == 'resistance'
     content.concat(content_tag(:span, "km")) if category == 'cardio'
@@ -25,11 +21,6 @@ class Workouts::SetSummaryComponent < ApplicationComponent
   end
 
   def sub_metric
-    content = sets_and_reps
-    content_tag(:span, content, class: 'text-xs uppercase')
-  end
-
-  def sets_and_reps
-    "15 x 5 sets"
+    content_tag(:span, "#{count} x #{reps}", class: 'text-xs uppercase')
   end
 end
