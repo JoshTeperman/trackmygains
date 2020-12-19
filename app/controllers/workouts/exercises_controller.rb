@@ -1,6 +1,6 @@
 module Workouts
   class ExercisesController < Workouts::MainController
-    before_action :set_exercise, only: [:edit]
+    before_action :set_exercise, only: [:show]
 
     def new
       @exercise_form = BusinessModels::Workouts::Exercise.new(workout: @workout)
@@ -29,13 +29,6 @@ module Workouts
     end
 
     def show
-      @exercise = Exercise.find_by(id: params[:id])
-    end
-
-    def edit
-    end
-
-    def update
     end
 
     private
@@ -45,7 +38,7 @@ module Workouts
     end
 
     def set_exercise
-      @exercise = Exercise.find(params[:id])
+      @exercise = Exercise.find_by(exercisable_id: params[:id])
     end
   end
 end
